@@ -1,5 +1,8 @@
 package infozenplus.com.flutter_open_whatsapp;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -42,8 +45,9 @@ public class FlutterOpenWhatsappPlugin implements MethodCallHandler {
       try {
         String mobileNo = call.argument("mobileNo");
         String message = call.argument("message");
+        String encodedMessage = URLEncoder.encode(message, StandardCharsets.UTF_8.toString());
         //https://wa.me/919167370647?text=Yes%20We'll%20do%20this%20in%20frag4%20inOCW
-        String url = "https://wa.me/" + mobileNo.trim() + "?text=" + message.trim();
+        String url = "https://wa.me/" + mobileNo.trim() + "?text=" + encodedMessage;
         i.setPackage("com.whatsapp");
         i.setData(Uri.parse(url));
         if (i.resolveActivity(packageManager) != null) {
