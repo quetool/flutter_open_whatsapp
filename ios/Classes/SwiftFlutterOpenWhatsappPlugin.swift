@@ -25,7 +25,7 @@ public class SwiftFlutterOpenWhatsappPlugin: NSObject, FlutterPlugin {
                     let mobileNo = myArgs["mobileNo"] as? String,
                     let message = myArgs["message"] as? String {
                     //result("Params received on iOS = \(someInfo1), \(someInfo2)")
-                    let url: String = ("https://wa.me/" + mobileNo + "?text=" + (message.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""))
+                    let url: String = ("https://wa.me/" + mobileNo + "?text=" + (message.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) ?? ""))
                     if let whatsAppUrl = URL(string: url) {
                         if UIApplication.shared.canOpenURL(whatsAppUrl) {
                             UIApplication.shared.openURL(whatsAppUrl)
